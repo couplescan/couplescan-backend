@@ -33,7 +33,7 @@ try:
     genai.configure(api_key=GOOGLE_API_KEY)
     # Using a model optimized for speed and cost for this task initially
     # Ensure this model supports JSON output or adjust parsing logic if needed
-    gemini_model = genai.GenerativeModel('gemini-1.5-flash-latest') # Or 'gemini-1.5-pro-latest' for more power
+    gemini_model = genai.GenerativeModel('gemini-2.5-flash') # Switched to Pro model
     logger.info("Google Generative AI client configured successfully.")
 except Exception as e:
     logger.error(f"Error configuring Google Generative AI client: {e}")
