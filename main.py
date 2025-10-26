@@ -48,24 +48,26 @@ app = FastAPI(
 )
 
 # --- CORS Middleware ---
-# BE VERY CAREFUL with ["*"] in production. List specific origins.
+# Define allowed origins explicitly for better security
 origins = [
-    "http://localhost",
-    "http://localhost:3000",
+    "http://localhost",          # Allow local development 
+    "http://localhost:3000",     # Common local dev port
     "http://127.0.0.1",
     "http://127.0.0.1:3000",
-    "https://*.vercel.app", # Allows Vercel previews
-    # "https://your-production-frontend-domain.com" # TODO: Add your final domain
+    "https://couplescan.vercel.app", # <-- ADD YOUR EXACT VERCEL URL HERE
+    # You might keep "*.vercel.app" if you rely heavily on preview URLs, 
+    # but being specific is safer for production.
+    # "https://*.vercel.app", 
 ]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins, # Use the origins list
+    allow_origins=origins, # Use the specific list
     allow_credentials=True,
-    allow_methods=["GET", "POST"],
-    allow_headers=["*"],
+    allow_methods=["GET", "POST"], # Allow only needed methods
+    allow_headers=["*"], # Or specify allowed headers if known
 )
-logger.info(f"CORS middleware added for origins: {origins}")
+logger.info(f"CORS middleware updated for specific origins: {origins}")
 
 # --- Pydantic Models (Data Validation) ---
 
